@@ -49,4 +49,4 @@ class UndoRedoModule
   }
 }
 
-export default new BrowserHistoryModule();
+export default new UndoRedoModule();

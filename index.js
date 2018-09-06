@@ -5,7 +5,7 @@ import InputTextField from './ui/InputTextField';
 import TreeNode from './ui/TreeNode';
 import DragAndDrop from './ui/DragAndDrop';
 import BaseComponent from './core/BaseComponent';
-import crypto from './core/crypto';
+import Crypto from './core/crypto';
 import Module from './core/Module';
 import EventDispatcher from './core/EventDispatcher';
 import Interface from './core/Interface';
@@ -15,8 +15,17 @@ import HttpModule from './modules/HttpModule';
 import CookiesModule from './modules/CookiesModule';
 import ResourcesModule from './modules/ResourcesModule';
 import UndoRedoModule from './modules/UndoRedoModule';
+import React from "react";
+import PropTypes from "prop-types";
+import {css} from 'emotion'
+import {Redirect} from 'react-router';
 
 export {
+  React,
+  PropTypes,
+  css,
+  Redirect,
+
   // UI
   Checkbox,
   ColorPicker,
@@ -27,7 +36,7 @@ export {
   BaseComponent,
 
   // core
-  crypto,
+  Crypto,
   Module,
   EventDispatcher,
   Interface,

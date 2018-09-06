@@ -13,16 +13,16 @@ class LocalizationModule
       throw Error("MUST set defaultLanguage in the config data");
 
     Object.keys(this.config.languages).forEach(key => this.config.languages[key].locale = key);
-    this.setLanguage(defaultLanguage);
+    this.setLanguage(defaultLanguage,this.config.data);
     this.defaultLanguageData = this.activeLanguageData;
   }
 
-  setLanguage(language) {
+  setLanguage(language, data) {
     if (!this.config.languages[language])
       throw new Error(`Unsupported language: ${language}`);
 
     this.activeLanguage = this.config.languages[language];
-    this.activeLanguageData = require(`../../res/localization/${language}`);
+    this.activeLanguageData = data;
   }
 
   getAvailableLanguages() {

@@ -4,7 +4,7 @@
 //TODO extend Logger and print config per module
 
 import LocalizationModule from '../modules/LocalizationModule';
-import EventDispatcher from '../modules/event-dispatcher';
+import EventDispatcher from '../core/EventDispatcher';
 
 class Module {
   constructor(...interfaces) {
