@@ -1,7 +1,7 @@
 /**
  * Created by tacb0ss on 27/07/2018.
  */
-import Module from '../core/module';
+import Module from '../core/Module';
 
 const regexpSingle = new RegExp("([a-zA-Z0-9\-\._]{1,})\s*=(.*)");
 

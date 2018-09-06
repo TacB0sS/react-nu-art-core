@@ -2,7 +2,6 @@
  * Created by tacb0ss on 27/07/2018.
  */
 //TODO extend Logger and print config per module
-import Module from '../core/module';
 
 class EventDispatcher {
 

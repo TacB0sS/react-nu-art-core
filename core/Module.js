@@ -3,7 +3,7 @@
  */
 //TODO extend Logger and print config per module
 
-import LocalizationModule from '../modules/localization';
+import LocalizationModule from '../modules/LocalizationModule';
 import EventDispatcher from '../modules/event-dispatcher';
 
 class Module {
