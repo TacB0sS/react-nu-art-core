@@ -40,7 +40,7 @@ class BaseComponent
     return ResourcesModule.getImageUrl(relativePath);
   }
 
-  getQueryParameter(name) {
+  static getQueryParameter(name) {
     return HistoryModule.getQueryParams()[name];
   }
 

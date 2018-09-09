@@ -13,6 +13,7 @@ import BrowserHistoryModule from './modules/BrowserHistoryModule';
 import LocalizationModule from './modules/LocalizationModule';
 import HttpModule from './modules/HttpModule';
 import CookiesModule from './modules/CookiesModule';
+import StorageModule from './modules/StorageModule';
 import ResourcesModule from './modules/ResourcesModule';
 import UndoRedoModule from './modules/UndoRedoModule';
 import React from "react";
@@ -46,6 +47,7 @@ export {
   LocalizationModule,
   HttpModule,
   CookiesModule,
+  StorageModule,
   ResourcesModule,
   UndoRedoModule,
 }

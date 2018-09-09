@@ -14,6 +14,30 @@ class Module {
     });
   }
 
+  static loadObject(key) {
+    const itemFromStorage = localStorage.getItem(key);
+    if (!itemFromStorage)
+      return undefined;
+
+    return JSON.parse(itemFromStorage);
+  }
+
+  static loadString(key) {
+    const itemFromStorage = localStorage.getItem(key);
+    if (!itemFromStorage)
+      return undefined;
+
+    return itemFromStorage;
+  }
+
+  static storeObject(key, obj) {
+    localStorage.setItem(key, JSON.stringify(obj));
+  }
+
+  static storeString(key, string) {
+    localStorage.setItem(key, JSON.stringify(string));
+  }
+
   _implements(_interface) {
     return this.interfaces.indexOf(_interface) !== -1;
   }

@@ -11,6 +11,7 @@ class TreeNode
 
   constructor(props) {
     super(props);
+    this.toggleExpanded = this.toggleExpanded.bind(this);
     this.state = {expanded: this.props.expanded};
   }
 
