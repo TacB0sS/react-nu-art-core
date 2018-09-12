@@ -1,17 +1,28 @@
 import {React, css, BaseComponent, PropTypes} from '../defaults';
 import {SketchPicker} from 'react-color'
-const style_swatch = css({
-  padding: '5px',
+const style_container = css({
+  padding: '4px',
+  display: "flex",
+  alignItems: "center",
   background: '#fff',
   borderRadius: '1px',
   boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
-  display: 'inline-block',
   cursor: 'pointer',
+  label: 'color-picker-container',
 });
 
 const style_popover = css({
   position: 'absolute',
   zIndex: '2',
+});
+const arrowExpanded = css({
+  marginLeft: "4px",
+  width: "16px",
+  height: "16px",
+});
+
+const arrowCollapsed = css(arrowExpanded, {
+  transform: "rotate(180deg)",
 });
 
 const style_cover = css({
@@ -61,22 +72,24 @@ class ColorPicker
 
   render() {
     const style_color = css({
-      width: '36px',
-      height: '14px',
+      width: "40px",
+      height: "20px",
       borderRadius: '2px',
       background: `rgba(${ this.state.color.r }, ${ this.state.color.g }, ${ this.state.color.b }, ${ this.state.color.a })`,
+      label: 'color-picker-color',
     });
 
     return (
       <div>
-        <div className={ style_swatch } onClick={ this.onClick }>
-          <div className={ style_color }/>
+        <div className={style_container} onClick={this.onClick}>
+          <div className={style_color}/>
+          <img className={this.state.displayColorPicker ? arrowExpanded : arrowCollapsed} src={this.getImageUrl('icon__arrow_up')}/>
         </div>
 
-        { this.state.displayColorPicker ? <div className={ style_popover }>
-          <div className={ style_cover } onClick={ this.onClose }/>
-          <SketchPicker color={ this.state.color } onChange={ this.onChange }/>
-        </div> : null }
+        {this.state.displayColorPicker ? <div className={style_popover}>
+          <div className={style_cover} onClick={this.onClose}/>
+          <SketchPicker color={this.state.color} onChange={this.onChange}/>
+        </div> : ""}
       </div>
     )
   }

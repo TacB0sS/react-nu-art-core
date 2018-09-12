@@ -74,7 +74,7 @@ class InputTextField
   render() {
     return (
       <div className={inputFieldContainer}>
-        <div className={inputFieldLabel}>{this.props.label}</div>
+        {this.props.label ? <div className={inputFieldLabel}>{this.props.label}</div> : "" }
 
         <input
           value={this.props.value}

@@ -25,6 +25,10 @@ class BaseComponent
     EventDispatcher.register(this);
   }
 
+  static dispatchEvent(_interface, method, ...args) {
+    EventDispatcher.dispatchEvent(_interface, method, ...args);
+  }
+
   _implements(_interface) {
     return this.interfaces.indexOf(_interface) !== -1;
   }
@@ -34,6 +38,9 @@ class BaseComponent
   }
 
   getImageUrl(relativePath) {
+    if (!relativePath)
+      return "";
+
     if (relativePath.indexOf(".") === -1)
       relativePath += ".png";
 

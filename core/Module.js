@@ -50,7 +50,7 @@ class Module {
   }
 
   dispatchEvent(_interface, method, ...args) {
-    EventDispatcher.dispatchEvent(_interface, method, args);
+    EventDispatcher.dispatchEvent(_interface, method, ...args);
   }
 
   setup(config) {

@@ -41,7 +41,7 @@ class EventDispatcher {
       if (!listener._implements(_interface))
         return;
 
-      listener[method](params);
+      listener[method](...params);
     })
   }
 }

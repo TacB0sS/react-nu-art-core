@@ -1,6 +1,6 @@
 import {React, css, BaseComponent, PropTypes} from '../defaults';
 
-const wrapper = css`
+const renderer_wrapper = css`
   display: flex;
   align-items: center;
 `;
@@ -9,14 +9,6 @@ const checkbox = css`
   width: 16px;
   height: 16px;
   margin-right: 8px;
-`;
-
-const style_wrapper = css`
-  width:100%;
-  height:100%;
-  label: checkbox-wrapper;
-`;
-const textStyle = css`
 `;
 
 const uncheckedStyle = css`
@@ -38,9 +30,9 @@ class DefaultRenderer
 
   render() {
     return (
-      <div className={wrapper}>
+      <div className={renderer_wrapper}>
         <div className={this.props.checked ? checkedStyle : uncheckedStyle}/>
-        <div className={textStyle}>{this.props.label}</div>
+        {this.props.label}
       </div>
     );
   }
@@ -75,11 +67,10 @@ class Checkbox
 
   render() {
     const Renderer = this.state.renderer;
-    // this.logDebug(`render: ${this.checked}`);
 
     return (
-      <div className={style_wrapper} onClick={this.toggle}>
-        <Renderer label={this.props.label} checked={this.state.checked} rotate={this.props.rotate}/>
+      <div className={this.props.style} onClick={this.toggle}>
+        <Renderer label={this.props.label} imagePath={this.props.imagePath} checked={this.state.checked} rotate={this.props.rotate}/>
       </div>);
   }
 }
@@ -87,6 +78,8 @@ class Checkbox
 Checkbox.propTypes = {
   checked: PropTypes.bool,
   label: PropTypes.string,
+  imagePath: PropTypes.string,
+  style: PropTypes.string,
   renderer: PropTypes.any,
   onCheckChanged: PropTypes.func,
 };

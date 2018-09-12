@@ -24,14 +24,11 @@ class TreeNode
   }
 
   renderNodes(items) {
-    return (<div>{items.map((item, index) => {
-        const Renderer = this.props.renderer;
-        return <Renderer renderer={this.props.renderer} item={item} key={index} isLast={index === items.length - 1}
-                         onClick={this.props.onClick}/>
-      })}
-      </div>
-    );
-
+    return items.map((item, index) => {
+      const Renderer = this.props.renderer;
+      return <Renderer renderer={this.props.renderer} item={item} key={index} isLast={index === items.length - 1}
+                       onClick={this.props.onClick}/>
+    })
   }
 }
 
