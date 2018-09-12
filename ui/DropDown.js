@@ -60,7 +60,6 @@ class DropDown
 
     this.setState(prevState => {
       const newOpenState = !prevState.isOpen;
-      console.log(`toggle list: ${newOpenState}`);
       return {
         isOpen: newOpenState,
         selected: selected || prevState.selected
@@ -70,7 +69,7 @@ class DropDown
 
   onSelected(item, e) {
     this.toggleList(e, item);
-    this.props.onSelected(item);
+    this.props.onSelected(item, this.props.id);
   }
 
   render() {
@@ -99,6 +98,7 @@ class DropDown
 }
 
 DropDown.propTypes = {
+  id: PropTypes.string,
   items: PropTypes.any,
   renderer: PropTypes.any,
   onSelected: PropTypes.func,
