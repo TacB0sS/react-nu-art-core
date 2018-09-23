@@ -84,7 +84,7 @@ class Module {
   }
 
   logError(message) {
-    console.log(message);
+    console.error(message);
   }
 }
 

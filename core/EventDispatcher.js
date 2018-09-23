@@ -37,12 +37,17 @@ class EventDispatcher {
   }
 
   dispatchEvent(_interface, method, ...params) {
+    let called = false;
     this.listeners.forEach((listener) => {
       if (!listener._implements(_interface))
         return;
 
+      called = true;
       listener[method](...params);
-    })
+    });
+
+    if (!called)
+      console.error(`BEWARE... no listeners for interface: ${_interface.name}.${method}`)
   }
 }
 

@@ -4,6 +4,7 @@ import DropDown from './ui/DropDown';
 import InputTextField from './ui/InputTextField';
 import TreeNode from './ui/TreeNode';
 import DragAndDrop from './ui/DragAndDrop';
+import Slider from './ui/Slider';
 import BaseComponent from './core/BaseComponent';
 import Crypto from './core/crypto';
 import Module from './core/Module';
@@ -28,6 +29,7 @@ export {
   Redirect,
 
   // UI
+  Slider,
   Checkbox,
   ColorPicker,
   DropDown,

@@ -4,26 +4,13 @@ import {css} from 'emotion'
 
 const inputFieldContainer = css`
   align-items: center;
+  width: 100%;
   label: input-field-container;
 `;
 
 const inputFieldLabel = css`
   margin-right: 10px;
   label: input-field-label;
-`;
-
-const input = css`
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border-radius: 40px !important;
-  box-shadow: 0 0 0 1px rgba(41, 41, 41, 0.2) inset;
-  font-size: 18px;
-  color: #242424;
-  border: none;
 `;
 
 class InputTextField
@@ -41,7 +28,7 @@ class InputTextField
 
   onValueChanged(evt) {
     let value = evt.target.value;
-    this.props.onInputValueChanged && this.props.onInputValueChanged(value, this.props.id);
+    this.props.onChange && this.props.onChange(value, this.props.id);
     this.setState(() => {
       return {value: value}
     });
@@ -55,7 +42,7 @@ class InputTextField
     if (!this.props.validateValue)
       return true;
 
-    let errorMessage = this.props.validateValue(value);
+    let errorMessage = this.props.validateValue(value, this.props.id);
 
     this.setState(() => {
       return {error: errorMessage}
@@ -78,7 +65,7 @@ class InputTextField
 
         <input
           value={this.props.value}
-          className={this.props.style || input}
+          className={this.props.style || ""}
           onChange={this.onValueChanged}
           id={this.props.id}
           label={this.props.label}
@@ -102,7 +89,7 @@ class InputTextField
 InputTextField.propTypes = {
   label: PropTypes.string,
   value: PropTypes.any,
-  onInputValueChanged: PropTypes.func,
+  onChange: PropTypes.func,
   validateValue: PropTypes.func,
   onFocusLost: PropTypes.func,
 };
