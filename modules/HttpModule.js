@@ -3,8 +3,8 @@
  */
 import Module from '../core/Module';
 class HttpRequest {
-  constructor(baseUrl) {
-    this.baseUrl = baseUrl;
+  constructor(origin) {
+    this.origin = origin;
     this.headers = {};
   }
 
@@ -77,7 +77,7 @@ class HttpRequest {
       onCompleted(xhr);
     };
 
-    xhr.open(this.method, this.url.startsWith("http") ? this.url : this.baseUrl + this.url);
+    xhr.open(this.method, this.url.startsWith("http") ? this.url : this.origin + this.url);
     Object.keys(this.headers).forEach((key) => {
       xhr.setRequestHeader(key, this.headers[key]);
     });
@@ -92,11 +92,14 @@ class HttpModule
 
   constructor() {
     super();
-    this.baseUrl = "https://localhost:3000";
+  }
+
+  init() {
+    this.origin = this.config.origin || "https://localhost:3000";
   }
 
   createRequest(method) {
-    return new HttpRequest(this.baseUrl).setMethod(method);
+    return new HttpRequest(this.origin).setMethod(method);
   }
 
   execute(method, url, headers, data, onCompleted) {
