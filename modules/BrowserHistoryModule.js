@@ -6,42 +6,42 @@ import createHistory from 'history/createBrowserHistory';
 import qs from 'query-string';
 
 class BrowserHistoryModule
-  extends Module {
+	extends Module {
 
-  constructor() {
-    super();
-    this.history = createHistory();
-  }
+	constructor() {
+		super();
+		this.history = createHistory();
+	}
 
-  push(push) {
-    this.history.push(push);
-  }
+	push(push) {
+		this.history.push(push);
+	}
 
-  setUrl(url) {
-    this.push({pathname: url});
-  }
+	setUrl(url) {
+		this.push({pathname: url});
+	}
 
-  setQuery(url, query) {
-    const searchString = qs.stringify(query);
-    const data = {
-      pathname: url ? url : this.getCurrent().pathname,
-      search: searchString
-    };
+	setQuery(url, query) {
+		const searchString = qs.stringify(query);
+		const data = {
+			pathname: url ? url : this.getCurrent().pathname,
+			search: searchString
+		};
 
-    this.push(data);
-  }
+		this.push(data);
+	}
 
-  getQueryParams() {
-    return qs.parse(this.getCurrent().search);
-  }
+	getQueryParams() {
+		return qs.parse(this.getCurrent().search);
+	}
 
-  getCurrent() {
-    return this.history.location;
-  }
+	getCurrent() {
+		return this.history.location;
+	}
 
-  getHistory() {
-    return this.history;
-  }
+	getHistory() {
+		return this.history;
+	}
 }
 
 export default new BrowserHistoryModule();

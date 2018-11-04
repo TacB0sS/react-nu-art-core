@@ -25,14 +25,11 @@ import PropTypes from "prop-types";
 import {css} from 'emotion'
 import {Redirect} from 'react-router';
 
-import styles from "./styles/global.css";
-
 export {
 	React,
 	PropTypes,
 	css,
 	Redirect,
-	styles,
 
 	// UI
 	Slider,

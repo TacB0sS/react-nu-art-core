@@ -39,8 +39,11 @@ const createSpacing = (propType, type, t, r = t, b = r, l = b) => {
 };
 
 const createLinearLayout = (orientation, alignItems, justifyContent, wrap, reverse) => {
-	const getAlignItems = function (align) {
-		switch (align) {
+	const getAlignItems = function (alignItems) {
+		if (alignItems === undefined || alignItems === null)
+			return;
+
+		switch (alignItems) {
 			case general.Start:
 			case general.Top:
 				return "flex-start";
@@ -56,12 +59,15 @@ const createLinearLayout = (orientation, alignItems, justifyContent, wrap, rever
 				return "stretch";
 
 			default:
-				throw new Error(`Unknown alignItems: ${align}`)
+				throw new Error(`Unknown alignItems: ${alignItems}`)
 		}
 	};
 
-	const getJustifyContent = function (content) {
-		switch (content) {
+	const getJustifyContent = function (justifyContent) {
+		if (justifyContent === undefined || justifyContent === null)
+			return;
+
+		switch (justifyContent) {
 			case general.Start:
 				return "flex-start";
 
@@ -81,7 +87,7 @@ const createLinearLayout = (orientation, alignItems, justifyContent, wrap, rever
 				return "space-evenly";
 
 			default:
-				throw new Error(`Unknown justifyContent: ${content}`)
+				throw new Error(`Unknown justifyContent: ${justifyContent}`)
 		}
 	};
 
@@ -91,7 +97,9 @@ const createLinearLayout = (orientation, alignItems, justifyContent, wrap, rever
 		flexWrap: wrap,
 	};
 
-	toRet.flexDirection = reverse ? toRet.flexFlow + "-reverse" : toRet.flexFlow;
+	if (reverse !== undefined)
+		toRet.flexDirection = reverse ? toRet.flexFlow + "-reverse" : toRet.flexFlow;
+
 	toRet.alignItems = getAlignItems(alignItems);
 	toRet.justifyContent = getJustifyContent(justifyContent);
 
@@ -99,15 +107,20 @@ const createLinearLayout = (orientation, alignItems, justifyContent, wrap, rever
 };
 
 const createStyle = (key, creator, ...args) => {
-	let key = `${key}-${args.join("-")}`;
+	let cacheKey = `${key}-${args.join("-")}`;
 
-	let toRet = general.cache[key];
+	let toRet = general.cache[cacheKey];
 	if (toRet)
 		return toRet;
 
-	toRet = creator(args);
-	toRet.freeze();
-	return general.cache[key] = toRet;
+	toRet = creator(...args);
+	toRet.join = (...otherStyles) => {
+		console.log(...otherStyles);
+		return Object.assign({}, toRet, ...otherStyles)
+	};
+
+	Object.freeze(toRet);
+	return general.cache[cacheKey] = toRet;
 };
 
 let general = {
@@ -145,7 +158,7 @@ let general = {
 	Wrap: "wrap",
 	Reverse: "Reverse",
 
-	LinearLayout: (orientation = general.Horizontal, alignItems = general.Center, justifyContent = general.Center, wrap = false, reverse = false) => {
+	LinearLayout: (orientation = general.Horizontal, alignItems = general.Center, justifyContent, wrap, reverse) => {
 		return createStyle("LinearLayout", createLinearLayout, orientation, alignItems, justifyContent, wrap, reverse);
 	},
 

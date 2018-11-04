@@ -8,76 +8,80 @@ import HistoryModule from '../modules/BrowserHistoryModule';
 import EventDispatcher from './EventDispatcher';
 
 class BaseComponent
-  extends React.Component {
+	extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.tag = this.constructor.name;
-    this.state = {};
-  }
+	constructor(props) {
+		super(props);
+		this.tag = this.constructor.name;
+		this.state = {};
+	}
 
-  setInterfaces(...interfaces) {
-    this.interfaces = interfaces;
-    interfaces.forEach((_interface) => {
-      _interface.validate(this);
-    });
+	setInterfaces(...interfaces) {
+		this.interfaces = interfaces;
+		interfaces.forEach((_interface) => {
+			_interface.validate(this);
+		});
 
-    EventDispatcher.register(this);
-  }
+		EventDispatcher.register(this);
+	}
 
-  static dispatchEvent(_interface, method, ...args) {
-    EventDispatcher.dispatchEvent(_interface, method, ...args);
-  }
+	static dispatchEvent(_interface, method, ...args) {
+		EventDispatcher.dispatchEvent(_interface, method, ...args);
+	}
 
-  _implements(_interface) {
-    return this.interfaces.indexOf(_interface) !== -1;
-  }
+	_implements(_interface) {
+		return this.interfaces.indexOf(_interface) !== -1;
+	}
 
-  componentWillUnmount() {
-    EventDispatcher.unregister(this);
-  }
+	componentWillUnmount() {
+		EventDispatcher.unregister(this);
+	}
 
-  getImageUrl(relativePath) {
-    if (!relativePath)
-      return "";
+	getImageUrl(relativePath) {
+		if (!relativePath)
+			return "";
 
-    if (relativePath.indexOf(".") === -1)
-      relativePath += ".png";
+		if (relativePath.indexOf(".") === -1)
+			relativePath += ".png";
 
-    return ResourcesModule.getImageUrl(relativePath);
-  }
+		return ResourcesModule.getImageUrl(relativePath);
+	}
 
-  static getQueryParameter(name) {
-    return HistoryModule.getQueryParams()[name];
-  }
+	static getQueryParameter(name) {
+		return HistoryModule.getQueryParams()[name];
+	}
 
-  getString(key, ...params) {
-    return LocalizationModule.getString(key, params);
-  }
+	static getUrl() {
+		return HistoryModule.getCurrent().pathname;
+	}
 
-  logVerbose(message) {
-    console.log(`${this.tag}: ${message}`);
-  }
+	getString(key, ...params) {
+		return LocalizationModule.getString(key, params);
+	}
 
-  logDebug(message) {
-    console.log(`${this.tag}: ${message}`);
-  }
+	logVerbose(message) {
+		console.log(`${this.tag}: ${message}`);
+	}
 
-  logInfo(message) {
-    console.log(`${this.tag}: ${message}`);
-  }
+	logDebug(message) {
+		console.log(`${this.tag}: ${message}`);
+	}
 
-  logWarning(message) {
-    console.log(`${this.tag}: ${message}`);
-  }
+	logInfo(message) {
+		console.log(`${this.tag}: ${message}`);
+	}
 
-  logError(message) {
-    console.log(`${this.tag}: ${message}`);
-  }
+	logWarning(message) {
+		console.log(`${this.tag}: ${message}`);
+	}
 
-  toString() {
-    return this.constructor.name;
-  }
+	logError(message) {
+		console.log(`${this.tag}: ${message}`);
+	}
+
+	toString() {
+		return this.constructor.name;
+	}
 }
 
 export default BaseComponent;

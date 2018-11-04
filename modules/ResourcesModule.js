@@ -5,16 +5,16 @@
 import Module from '../core/Module';
 
 class ResourcesModule
-  extends Module {
+	extends Module {
 
-  init() {
-    this.relativePath = "../../res/";
-    this.relativePathImages = `${this.relativePath}images/`;
-  }
+	init() {
+		this.relativePath = "../../res/";
+		this.relativePathImages = `${this.relativePath}images/`;
+	}
 
-  getImageUrl(relativePath) {
-    return `${this.relativePathImages}${relativePath}`
-  }
+	getImageUrl(relativePath) {
+		return `${this.relativePathImages}${relativePath}`
+	}
 
 }
 

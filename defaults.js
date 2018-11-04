@@ -7,8 +7,8 @@ import PropTypes from "prop-types";
 import BaseComponent from "./core/BaseComponent";
 
 export {
-  React,
-  css,
-  PropTypes,
-  BaseComponent,
+	React,
+	css,
+	PropTypes,
+	BaseComponent,
 }

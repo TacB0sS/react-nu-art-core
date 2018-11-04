@@ -164,17 +164,17 @@ class Slider
 
 	render() {
 		return (
-      <div
-        className={style_container}
-        onMouseEnter={this.onMouseEnter}
-        onMouseLeave={this.onMouseLeave}
-        onMouseDown={this.onMouseDown}
-        style={{opacity: this.state.hover || this.state.active ? 1 : 0.8,}}
-        ref={(ref) => this._container = ref}>
+			<div
+				className={style_container}
+				onMouseEnter={this.onMouseEnter}
+				onMouseLeave={this.onMouseLeave}
+				onMouseDown={this.onMouseDown}
+				style={{opacity: this.state.hover || this.state.active ? 1 : 0.8,}}
+				ref={(ref) => this._container = ref}>
 				{this.renderBackground()}
 				{this.renderProgress()}
 				{this.renderThumb()}
-      </div>
+			</div>
 		);
 	}
 
@@ -195,7 +195,7 @@ class Slider
 		const progress = this.state.progress * this._container.clientWidth;
 
 		return <div className={`${style_centerVertically} ${style_bg} ${style_progress}`}
-                style={{
+								style={{
 									width: `${progress}px`,
 									backgroundColor: this.props.progressColor,
 								}}/>;
@@ -208,12 +208,12 @@ class Slider
 		const progress = this.state.progress * this._container.clientWidth;
 
 		return <div
-      className={`${style_centerVertically} ${style_thumb}`}
-      style={{
+			className={`${style_centerVertically} ${style_thumb}`}
+			style={{
 				transform: `translateX(${progress}px)`,
 				backgroundColor: this.props.thumbColor,
 			}}
-    />;
+		/>;
 	}
 }
 

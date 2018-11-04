@@ -7,85 +7,85 @@ import LocalizationModule from '../modules/LocalizationModule';
 import EventDispatcher from '../core/EventDispatcher';
 
 class Module {
-  constructor(...interfaces) {
-    this.interfaces = interfaces;
-    interfaces.forEach((_interface) => {
-      _interface.validate(this);
-    });
-  }
+	constructor(...interfaces) {
+		this.interfaces = interfaces;
+		interfaces.forEach((_interface) => {
+			_interface.validate(this);
+		});
+	}
 
-  static loadObject(key) {
-    const itemFromStorage = localStorage.getItem(key);
-    if (!itemFromStorage)
-      return undefined;
+	static loadObject(key) {
+		const itemFromStorage = localStorage.getItem(key);
+		if (!itemFromStorage)
+			return undefined;
 
-    return JSON.parse(itemFromStorage);
-  }
+		return JSON.parse(itemFromStorage);
+	}
 
-  static loadString(key) {
-    const itemFromStorage = localStorage.getItem(key);
-    if (!itemFromStorage)
-      return undefined;
+	static loadString(key) {
+		const itemFromStorage = localStorage.getItem(key);
+		if (!itemFromStorage)
+			return undefined;
 
-    return itemFromStorage;
-  }
+		return itemFromStorage;
+	}
 
-  static storeObject(key, obj) {
-    localStorage.setItem(key, JSON.stringify(obj));
-  }
+	static storeObject(key, obj) {
+		localStorage.setItem(key, JSON.stringify(obj));
+	}
 
-  static storeString(key, string) {
-    localStorage.setItem(key, JSON.stringify(string));
-  }
+	static storeString(key, string) {
+		localStorage.setItem(key, JSON.stringify(string));
+	}
 
-  _implements(_interface) {
-    return this.interfaces.indexOf(_interface) !== -1;
-  }
+	_implements(_interface) {
+		return this.interfaces.indexOf(_interface) !== -1;
+	}
 
-  defineInterface(interfaceName, ...methods) {
+	defineInterface(interfaceName, ...methods) {
 
-    // this.onSparkListUpdate = "onSparkListUpdate";
-    // this.OnSparkListUpdateListener = DefineInterface("OnSparkListUpdateListener").addMethod(this.onSparkListUpdate);
+		// this.onSparkListUpdate = "onSparkListUpdate";
+		// this.OnSparkListUpdateListener = DefineInterface("OnSparkListUpdateListener").addMethod(this.onSparkListUpdate);
 
-  }
+	}
 
-  dispatchEvent(_interface, method, ...args) {
-    EventDispatcher.dispatchEvent(_interface, method, ...args);
-  }
+	dispatchEvent(_interface, method, ...args) {
+		EventDispatcher.dispatchEvent(_interface, method, ...args);
+	}
 
-  setup(config) {
-    this.config = config;
-    // console.log("this.config: "+JSON.stringify(this.config));
-    this.init();
-  }
+	setup(config) {
+		this.config = config;
+		// console.log("this.config: "+JSON.stringify(this.config));
+		this.init();
+	}
 
-  init() {
-    throw new Error("MUST override and implement");
-  }
+	init() {
+		throw new Error("MUST override and implement");
+	}
 
-  getString(key, ...params) {
-    return LocalizationModule.getString(key, ...params);
-  }
+	getString(key, ...params) {
+		return LocalizationModule.getString(key, ...params);
+	}
 
-  logVerbose(message) {
-    console.log(message);
-  }
+	logVerbose(message) {
+		console.log(message);
+	}
 
-  logDebug(message) {
-    console.log(message);
-  }
+	logDebug(message) {
+		console.log(message);
+	}
 
-  logInfo(message) {
-    console.log(message);
-  }
+	logInfo(message) {
+		console.log(message);
+	}
 
-  logWarning(message) {
-    console.log(message);
-  }
+	logWarning(message) {
+		console.log(message);
+	}
 
-  logError(message) {
-    console.error(message);
-  }
+	logError(message) {
+		console.error(message);
+	}
 }
 
 export default Module;
