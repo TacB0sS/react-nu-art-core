@@ -65,7 +65,7 @@ class InputTextField
 
 				<input
 					value={this.props.value}
-					className={this.props.style || ""}
+					className={this.props.className || ""}
 					onChange={this.onValueChanged}
 					id={this.props.id}
 					label={this.props.label}

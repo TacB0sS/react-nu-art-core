@@ -22,8 +22,14 @@ import UndoRedoModule from './modules/UndoRedoModule';
 
 import React from "react";
 import PropTypes from "prop-types";
-import {css} from 'emotion'
+import {css as _css} from 'emotion'
 import {Redirect} from 'react-router';
+const css = (...objects) => {
+	if (typeof objects[0][0] === "string" || objects[0][0] instanceof String)
+		return _css(objects[0][0]);
+
+	return _css(Object.assign({}, ...objects));
+};
 
 export {
 	React,

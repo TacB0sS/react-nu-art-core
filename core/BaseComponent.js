@@ -4,6 +4,7 @@
 import React from 'react';
 import LocalizationModule from '../modules/LocalizationModule';
 import ResourcesModule from '../modules/ResourcesModule';
+import StorageModule from '../modules/StorageModule';
 import HistoryModule from '../modules/BrowserHistoryModule';
 import EventDispatcher from './EventDispatcher';
 
@@ -23,6 +24,14 @@ class BaseComponent
 		});
 
 		EventDispatcher.register(this);
+	}
+
+	static store(key, value) {
+		StorageModule.store(key, value);
+	}
+
+	static load(key, defaultValue) {
+		return StorageModule.load(key, defaultValue);
 	}
 
 	static dispatchEvent(_interface, method, ...args) {

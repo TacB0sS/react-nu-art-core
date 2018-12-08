@@ -32,13 +32,16 @@ class StorageModule
 
 	}
 
-	load(key) {
+	load(key, defaultValue) {
 		let value = this.storage[key];
 		if (value)
 			return value;
 
 		value = localStorage.getItem(key);
-		return this.storage[key] = value ? JSON.parse(value) : undefined;
+		if (!value)
+			return defaultValue;
+
+		return this.storage[key] = JSON.parse(value);
 	}
 }
 
