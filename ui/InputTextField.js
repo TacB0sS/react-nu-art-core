@@ -1,6 +1,4 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import {css} from 'emotion'
+import  {React, css, PropTypes, BaseComponent}  from '../defaults';
 
 const inputFieldContainer = css`
   align-items: center;
@@ -14,7 +12,7 @@ const inputFieldLabel = css`
 `;
 
 class InputTextField
-	extends Component {
+	extends BaseComponent {
 	constructor(props) {
 		super(props);
 
