@@ -18,6 +18,7 @@ class BrowserHistoryModule
 	}
 
 	setUrl(url) {
+		this.logDebug(`setting url: ${url}`);
 		this.push({pathname: url});
 	}
 

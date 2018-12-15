@@ -19,6 +19,7 @@ import CookiesModule from './modules/CookiesModule';
 import StorageModule from './modules/StorageModule';
 import ResourcesModule from './modules/ResourcesModule';
 import UndoRedoModule from './modules/UndoRedoModule';
+import AnalyticsModule from './modules/AnalyticsModule';
 
 import React from "react";
 import PropTypes from "prop-types";
@@ -61,4 +62,5 @@ export {
 	StorageModule,
 	ResourcesModule,
 	UndoRedoModule,
+	AnalyticsModule,
 }

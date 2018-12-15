@@ -18,6 +18,11 @@ class HttpRequest {
 		return this;
 	}
 
+	setTimeout(timeout) {
+		this.timeout = timeout;
+		return this;
+	}
+
 	setHeaders(headers) {
 		if (!headers)
 			return this;
@@ -71,10 +76,28 @@ class HttpRequest {
 	execute(onCompleted) {
 		const xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = () => {
-			if (xhr.readyState !== 4)
+			if (xhr.readyState !== 4) {
 				return;
+			}
 
-			onCompleted(xhr);
+			onCompleted(undefined, xhr);
+		};
+
+		xhr.onerror = (err) => {
+			if (xhr.readyState === 4 && xhr.status === 0) {
+				let xhrWrap = {
+					status: 404,
+					url: this.url
+				};
+				onCompleted(undefined, xhrWrap)
+				return;
+			}
+
+			onCompleted(err, xhr);
+		};
+
+		xhr.ontimeout = (err) => {
+			onCompleted(err, xhr);
 		};
 
 		xhr.open(this.method, this.url.startsWith("http") ? this.url : this.origin + this.url);
@@ -92,14 +115,27 @@ class HttpModule
 
 	constructor() {
 		super();
+
+		// Seems like a decent hack from here: https://stackoverflow.com/a/26725823/348189
+		const xhrProto = XMLHttpRequest.prototype,
+			origOpen = xhrProto.open;
+
+		xhrProto.open = function (method, url) {
+			this.url = url;
+			return origOpen.apply(this, arguments);
+		};
+
 	}
 
 	init() {
-		this.origin = this.config.origin || "https://localhost:3000";
+		this.origin = this.config.origin;
+		this.timeout = this.config.timeout || 5000;
+		if (!this.origin)
+			throw new Error("MUST specify server origin path, e.g. 'https://localhost:3000'");
 	}
 
 	createRequest(method) {
-		return new HttpRequest(this.origin).setMethod(method);
+		return new HttpRequest(this.origin).setMethod(method).setTimeout(this.timeout);
 	}
 
 	execute(method, url, headers, data, onCompleted) {
@@ -107,4 +143,6 @@ class HttpModule
 	}
 }
 
-export default new HttpModule();
+const httpModule = new HttpModule()
+
+export default httpModule;
