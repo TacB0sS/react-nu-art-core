@@ -6,6 +6,12 @@
 import LocalizationModule from '../modules/LocalizationModule';
 import EventDispatcher from '../core/EventDispatcher';
 
+const _cssVerbose = "color: black;";
+const _cssDebug = "color: blue;";
+const _cssInfo = "color: green;";
+const _cssWarning = "color: orange;";
+const _cssError = "color: red;";
+
 class Module {
 	constructor(...interfaces) {
 		this.interfaces = interfaces;
@@ -68,23 +74,23 @@ class Module {
 	}
 
 	logVerbose(message) {
-		console.log(message);
+		console.log(`%c${message}`, _cssVerbose);
 	}
 
 	logDebug(message) {
-		console.log(message);
+		console.log(`%c${message}`, _cssDebug);
 	}
 
 	logInfo(message) {
-		console.log(message);
+		console.log(`%c${message}`, _cssInfo);
 	}
 
 	logWarning(message) {
-		console.log(message);
+		console.log(`%c${message}`, _cssWarning);
 	}
 
 	logError(message) {
-		console.error(message);
+		console.log(`%c${message}`, _cssError);
 	}
 }
 
